@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Phone DB</string>
+    <string name="manufacturer_tv">"Manufacturer: "</string>
+    <string name="model_tv">Model</string>
+    <string name="web_site_bt">WebStrona</string>
+    <string name="cancel_bt">Cancel</string>
+    <string name="save_bt">Save</string>
+    <string name="android_version_tv">AndroidVersion</string>
+    <string name="webpage_tv">WebPage</string>
+    <string name="manufacturer_et_err">Proszę wprowadzić producenta!</string>
+    <string name="android_version_et_err">Proszę wprowadzić wersję systemu Android!</string>
+    <string name="model_et_err">Proszę wprowadzić model!</string>
+    <string name="webpage_et_err">Proszę wprowadzić adres strony internetowej!</string>
+    <string name="str_share_twitter" />
+    <string name="str_share_facebook" />
+</resources>
