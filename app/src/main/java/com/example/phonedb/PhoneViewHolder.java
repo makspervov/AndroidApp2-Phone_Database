@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PhoneViewHolder extends RecyclerView.ViewHolder {
-    private TextView manufacturer;
-    private TextView model;
+    private final TextView manufacturer;
+    private final TextView model;
 
     public TextView getManufacturer() {
         return manufacturer;
@@ -21,8 +21,8 @@ public class PhoneViewHolder extends RecyclerView.ViewHolder {
 
     public PhoneViewHolder(@NonNull View itemView){
         super(itemView);
-        this.manufacturer = itemView.findViewById(R.id.manufacturer_tv);
-        this.model = itemView.findViewById(R.id.model_tv);
+        this.manufacturer = itemView.findViewById(R.id.manufacturerTextView);
+        this.model = itemView.findViewById(R.id.modelTextView);
 
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) manufacturer.getLayoutParams();
         layoutParams.setMargins(16, 16, 0, 16);

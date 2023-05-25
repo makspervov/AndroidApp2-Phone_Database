@@ -32,7 +32,7 @@ import java.util.concurrent.Executors;
         }
         private static final int NUMBER_OF_THREADS = 4;
         static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-        private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+        private static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
 
 //uruchamiane przy tworzeniu bazy (pierwsze
 //uruchomienie aplikacji, gdy baza nie istnieje)
@@ -42,7 +42,26 @@ import java.util.concurrent.Executors;
                 super.onCreate(db);
                 databaseWriteExecutor.execute(() -> {
                     PhoneDao dao = INSTANCE.phoneDao();
-                    Phone[] phones = {new Phone("google","Pixel 4a","13","store.google.com")};
+                    Phone[] phones = {
+                            new Phone(
+                                    "Google",
+                                    "Pixel 7a",
+                                    "13",
+                                    "https://store.google.com/us/product/pixel_7a?hl=en-US"),
+                            new Phone("Samsung",
+                                    "Galaxy S23 Ultra",
+                                    "13",
+                                    "http://samsung.com/ua/smartphones/galaxy-s23-ultra"),
+                            new Phone("Xiaomi",
+                                    "Redmi Note 10 Pro",
+                                    "11",
+                                    "https://www.mi.com/ua/product/redmi-note-10-pro/specs"),
+                            new Phone("Nothing",
+                                    "Phone (1)",
+                                    "12",
+                                    "https://pl.nothing.tech/pages/phone-1")
+                    };
+
                     for(Phone p:phones){
                         dao.insert(p);
                     }

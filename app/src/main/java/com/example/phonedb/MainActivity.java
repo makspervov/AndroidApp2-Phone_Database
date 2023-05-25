@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,29 +20,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
-    private RecyclerView phoneListRv;
+public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
     private PhoneViewModel phoneViewModel;
     private PhoneAdapter adapter;
     private ActivityResultLauncher<Intent> launcher;
-    private FloatingActionButton addPhoneFab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.phoneListRv = findViewById(R.id.phone_list_rv);
-        this.adapter = new PhoneAdapter(this.getLayoutInflater());
-        this.adapter.setOnPhoneClickListener(phone -> editSelectedPhone(phone));
-        this.phoneListRv.setAdapter(this.adapter);
 
-        this.addPhoneFab = findViewById(R.id.add_phone_fab);
-        this.addPhoneFab.setOnClickListener(view -> newPhone());
-        this.phoneListRv.setLayoutManager(new LinearLayoutManager(this));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setOnMenuItemClickListener(this);
+
+        RecyclerView phoneListRv = findViewById(R.id.phoneList);
+        this.adapter = new PhoneAdapter(this.getLayoutInflater());
+        this.adapter.setOnPhoneClickListener(this::editSelectedPhone);
+        phoneListRv.setAdapter(this.adapter);
+        FloatingActionButton addPhoneFab = findViewById(R.id.addPhoneFab);
+        addPhoneFab.setOnClickListener(view -> newPhone());
+        phoneListRv.setLayoutManager(new LinearLayoutManager(this));
         this.phoneViewModel = new ViewModelProvider(this).get(PhoneViewModel.class);
-        this.phoneViewModel.getPhoneList().observe(this, phones -> {
-            this.adapter.setPhoneList(phones);
-        });
-        this.launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> insertOrUpdatePhone(result));
+        this.phoneViewModel.getPhoneList().observe(this, phones -> this.adapter.setPhoneList(phones));
+        this.launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::insertOrUpdatePhone);
         ItemTouchHelper.Callback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             @Override
@@ -57,26 +59,35 @@ public class MainActivity extends AppCompatActivity {
 
         };
     ItemTouchHelper itemTouchHelper =new ItemTouchHelper(callback);
-    itemTouchHelper.attachToRecyclerView(this.phoneListRv);
+    itemTouchHelper.attachToRecyclerView(phoneListRv);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_examole, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item1:
-                this.phoneViewModel.deleteAllPhones();
-                Toast.makeText(this, "Usunięto wszystkie rekordy" , Toast.LENGTH_LONG).show();
-                return true;
+        if (item.getItemId() == R.id.action_delete_all) {
+            this.phoneViewModel.deleteAllPhones();
+            Toast.makeText(this, "All data has been deleted", Toast.LENGTH_LONG).show();
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onMenuItemClick(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_delete_all) {
+            this.phoneViewModel.deleteAllPhones();
+            Toast.makeText(this, "All data has been deleted", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
     }
 
     private void newPhone() {
@@ -92,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 String androidVersion = bundle.getString(PhoneActivity.ANDROIDVERSION_KEY);
                 String webSite = bundle.getString(PhoneActivity.WEBSITE_KEY);
                 String model = bundle.getString(PhoneActivity.MODEL_KEY);
-                Long idPhone = bundle.getLong(PhoneActivity.PHONE_ID_KEY);
+                long idPhone = bundle.getLong(PhoneActivity.PHONE_ID_KEY);
                 if(idPhone==0) {
                     this.phoneViewModel.insert(new Phone(manufacturer, model, androidVersion, webSite));
                 }else{

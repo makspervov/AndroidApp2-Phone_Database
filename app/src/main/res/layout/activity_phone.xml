@@ -13,18 +13,20 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/manufacturer_tv"
+            android:id="@+id/manufacturerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/manufacturer_tv" />
+            android:text="@string/manufacturerTextView" />
 
         <EditText
-            android:id="@+id/manufacturer_et"
+            android:id="@+id/manufacturerEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
-            android:hint="Wpisz manufacturer:"
-            android:text="" />
+            android:hint="@string/manufacturerHint"
+            android:text=""
+            android:importantForAutofill="no"
+            android:inputType="text" />
     </TableRow>
 
     <TableRow
@@ -33,39 +35,43 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/model_tv"
+            android:id="@+id/modelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/model_tv" />
+            android:text="@string/modelText" />
 
         <EditText
-            android:id="@+id/model_et"
+            android:id="@+id/modelEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
-            android:hint="Wpisz model:"
+            android:hint="@string/modelHint"
             android:text=""
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no"
+            android:inputType="text"/>
     </TableRow>
     <TableRow
-        android:id="@+id/android_verson_row"
+        android:id="@+id/android_version_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/android_version_tv"
+            android:id="@+id/aVersionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/android_version_tv" />
+            android:text="@string/androidTextView" />
 
         <EditText
-            android:id="@+id/android_version_et"
+            android:id="@+id/aVersionEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
-            android:hint="Wpisz Android Version"
+            android:hint="@string/androidHint"
             android:text=""
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no"
+            android:inputType="number"/>
     </TableRow>
     <TableRow
         android:id="@+id/webpage_row"
@@ -73,36 +79,38 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/webpage_tv"
+            android:id="@+id/urlTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/webpage_tv" />
+            android:text="@string/url" />
 
         <EditText
-            android:id="@+id/webpage_et"
+            android:id="@+id/urlEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
-            android:hint="Wpisz WebPage"
+            android:hint="@string/urlHint"
             android:text=""
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no"
+            android:inputType="textUri"/>
     </TableRow>
     <TableRow>
         <Button
-            android:id="@+id/web_site_bt"
+            android:id="@+id/urlButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/web_site_bt"/>
+            android:text="@string/urlButton"/>
         <Button
-            android:id="@+id/cancel_bt"
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancel_bt"/>
+            android:text="@string/cancelButton"/>
         <Button
-            android:id="@+id/save_bt"
+            android:id="@+id/saveButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/save_bt"/>
 
+            android:text="@string/saveButton"/>
     </TableRow>
 </TableLayout>

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="red">#FF0000</color>
+    <color name="Hunter_green">#4C8459</color>
+    <color name="Asparagus">#60935D</color>
+    <color name="Apple_green">#8DA52F</color>
+    <color name="Jade">#0DAB76</color>
+    <color name="Castleton_green">#07563b</color>
+    <color name="Black">#FF000000</color>
+    <color name="White">#FFFFFFFF</color>
+    <color name="Mexican_Red">#FF9E2424</color>
+    <style name="Theme.PhoneDB.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar" />
+    <style name="Theme.PhoneDB.PopupOverlay" parent="ThemeOverlay.AppCompat.DayNight" />
 </resources>
